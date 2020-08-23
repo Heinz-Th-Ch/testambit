@@ -1,18 +1,38 @@
 package abstracts;
 
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
-public class AbstractPlainJavaTest {
+import java.io.File;
+import java.io.IOException;
 
-    private static final String CLASS = "AbstractPlainJava";
-    private static final String PACKAGE = "abstracts";
-    private static final AbstractPlainJava testClass = new AbstractPlainJava();
+public class AbstractPlainJavaTest extends Assert {
+
+    private final String TEST_DATA_PATH = "testData/";
+
+    private final AbstractPlainJavaImpl abstractTest = new AbstractPlainJavaImpl();
+
+    @Before
+    public void setup() throws IOException {
+        File path = new File(TEST_DATA_PATH);
+        if (path.exists()) {
+            if (!path.delete()) {
+                throw new IOException("preparation of test failed");
+            }
+        }
+    }
 
     @Test
-    public void testClass() {
-        Assert.assertEquals("", testClass.getClass().getPackage().getName(), PACKAGE);
-        Assert.assertEquals("", testClass.getClass().getSimpleName(), CLASS);
+    public void getTestDataPath() throws IOException {
+        assertEquals("wrong path received",
+                TEST_DATA_PATH,
+                abstractTest.getTestDataPath());
+        assertTrue("path do not exist",
+                new File(TEST_DATA_PATH).exists());
+    }
+
+    static class AbstractPlainJavaImpl extends AbstractPlainJava {
     }
 
 }
