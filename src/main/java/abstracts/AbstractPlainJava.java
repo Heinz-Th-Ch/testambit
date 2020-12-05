@@ -19,8 +19,10 @@ public abstract class AbstractPlainJava extends Assert {
         return TEST_DATA_PATH;
     }
 
-    public void createTestPath(String simpleNameOfClass) throws IOException {
-        new File(getTestDataPath() + simpleNameOfClass).mkdirs();
+    public String createTestPath(String simpleNameOfClass) throws IOException {
+        String newPathName = getTestDataPath() + simpleNameOfClass;
+        new File(newPathName).mkdirs();
+        return newPathName;
     }
 
 }

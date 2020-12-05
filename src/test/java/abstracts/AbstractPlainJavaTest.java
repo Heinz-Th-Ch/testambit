@@ -39,8 +39,8 @@ public class AbstractPlainJavaTest extends Assert {
         // arrange
         String className = getClass().getSimpleName();
         String temporaryTestPath = TEST_DATA_PATH + className;
-        // act
-        abstractTest.createTestPath(className);
+        // act and assert
+        assertEquals("wrong path received", temporaryTestPath, abstractTest.createTestPath(className));
         // assert
         assertTrue("path do not exist",
                 new File(temporaryTestPath).exists());
