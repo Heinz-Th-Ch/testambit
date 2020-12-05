@@ -11,12 +11,16 @@ public abstract class AbstractPlainJava extends Assert {
 
     public String getTestDataPath() throws IOException {
         File path = new File(TEST_DATA_PATH);
-        if (!path.exists()){
-            if (!path.mkdir()){
+        if (!path.exists()) {
+            if (!path.mkdir()) {
                 throw new IOException("creation of path failed");
             }
         }
         return TEST_DATA_PATH;
+    }
+
+    public void createTestPath(String simpleNameOfClass) throws IOException {
+        new File(getTestDataPath() + simpleNameOfClass).mkdirs();
     }
 
 }

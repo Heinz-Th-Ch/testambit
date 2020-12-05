@@ -25,11 +25,27 @@ public class AbstractPlainJavaTest extends Assert {
 
     @Test
     public void getTestDataPath() throws IOException {
+        // act and assert
         assertEquals("wrong path received",
                 TEST_DATA_PATH,
                 abstractTest.getTestDataPath());
+        // assert
         assertTrue("path do not exist",
                 new File(TEST_DATA_PATH).exists());
+    }
+
+    @Test
+    public void createTestPath() throws IOException {
+        // arrange
+        String className = getClass().getSimpleName();
+        String temporaryTestPath = TEST_DATA_PATH + className;
+        // act
+        abstractTest.createTestPath(className);
+        // assert
+        assertTrue("path do not exist",
+                new File(temporaryTestPath).exists());
+        // clean up
+        new File(temporaryTestPath).delete();
     }
 
     static class AbstractPlainJavaImpl extends AbstractPlainJava {
